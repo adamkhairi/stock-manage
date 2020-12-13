@@ -41,7 +41,7 @@ namespace stock_manage
             //refNum = 0;
 
             Article art = new Article(refNum, title, sell, buy);
-            art.buyPrice = 0;
+            //art.buyPrice = 0;
             //refNum++;
 
             return art;
@@ -57,9 +57,9 @@ namespace stock_manage
             magasin.Add(art);
         }
 
-        public static void showArtMag(ArrayList arr)
+        public static void showArtMag(ArrayList mag)
         {
-            foreach (Article item in arr)
+            foreach (Article item in mag)
             {
                 item.getArticleInfo();
             }
