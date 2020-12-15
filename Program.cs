@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 namespace stock_manage
 {
     public class Program
@@ -11,8 +10,12 @@ namespace stock_manage
         {
             int refNum = 0;
             bool ifExit = true;
-            //IDictionary<string, Article> magasin = new Dictionary<string, Article>();
 
+            programme(ifExit, refNum);
+        }
+
+        static void programme(bool ifExit, int refNum)
+        {
             while (ifExit)
             {
                 try
@@ -23,14 +26,16 @@ namespace stock_manage
                     Console.WriteLine("To Search for Article in Stock tap :\"search\"");
                     Console.WriteLine("To Exit tap : \"exit\" ");
                     Console.WriteLine("------------------------------------------");
+
                     var choose = Console.ReadLine();
+
                     Console.WriteLine("------------------------------------------");
+
                     switch (choose.ToLower())
                     {
                         case "add":
-                            //Article.CreateArticle();
 
-                            Article.AddToMagasin(Article.CreateArticle(refNum), Stock.magasin);
+                            Article.AddToMagasin(Article.CreateArticle(refNum));
                             refNum++;
                             break;
 
@@ -41,6 +46,8 @@ namespace stock_manage
                             if (Stock.magasin.Count == 0)
                             {
                                 Console.WriteLine("Nothing to Show");
+                                Console.ReadKey();
+                                programme(ifExit, refNum);
                             }
 
                             break;
@@ -48,13 +55,29 @@ namespace stock_manage
                             Console.WriteLine("Article Title...?");
                             string title = Console.ReadLine();
                             Stock.search(title, Stock.magasin);
+
+                            Console.WriteLine("Do wanna Remove it ?(y/n)");
+                            var remove = Console.ReadLine();
+
+                            if (remove.ToLower() == "y")
+                            {
+                                Stock.magasin.Remove(title);
+                            }
+
+                            else
+                            {
+                                programme(ifExit, refNum);
+                            }
+
                             break;
+
                         case "exit":
                             ifExit = false;
                             break;
+
                         default:
                             Console.WriteLine("InvalidChoice !!!!");
-                            Console.ReadLine();
+                            programme(ifExit, refNum);
                             break;
                     }
                 }
@@ -64,12 +87,6 @@ namespace stock_manage
                     throw;
                 }
             }
-
-            //Console.WriteLine(magasin1[0].articleName);
-            // for (int i = 0;  i <= magasin1.Count ; i++)
-            // {
-            //     Console.WriteLine(magasin1[i].ArticleName);
-            // }
         }
     }
 }

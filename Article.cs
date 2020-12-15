@@ -50,9 +50,9 @@ namespace stock_manage
             return"Référence number : "+ refNum +". \nArticle Name : "+ articleName +". \nArticle Selling Price : " + sellPrice+ ". \nArticle Buying Price : "+buyPrice+".\n";
         }
 
-        public static void AddToMagasin(Article art, IDictionary<string, Article> magasin)
+        public static void AddToMagasin(Article art)
         {
-            magasin.Add(art.articleName, art);
+            Stock.magasin.Add(art.articleName, art);
         }
 
         public static void showArtMag(IDictionary<string, Article> mag)
@@ -63,7 +63,6 @@ namespace stock_manage
                 Console.WriteLine("Key :" +item.Key);
                 Console.WriteLine("Value :" + item.Value.getArticleInfo());
 
-                
             }
         }
     }
